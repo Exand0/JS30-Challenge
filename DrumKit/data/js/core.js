@@ -10,22 +10,30 @@ var sounds = {
     76: './data/sounds/tink.wav'
 }
 
-function removeTransition(e) {
-    e.classList.
+var handlers = {
+    
 }
 
-buttonDiv = document.querySelector('.keys_container');
-window.addEventListener('keydown', event => {
+function removeTransition(e) {
+    if (e.propertyName !== 'transform');
+    this.classList.remove('playing');
+}
+
+function playSound(event) {
     if (sounds[event.keyCode]) {
         let audio = new Audio(sounds[event.keyCode]);
         audio.play();
         let key = document.querySelector(`.key[data-key="${event.keyCode}"]`);
         key.classList.add('playing');
     }  
-})
+}
 
+buttonDiv = document.querySelector('.keys_container');
 const keys = document.querySelectorAll('.key');
-
+var events = {
+    
+}
 keys.forEach(a => a.addEventListener('transitionend', removeTransition));
+window.addEventListener('keydown', playSound);
 
 
