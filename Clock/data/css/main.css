@@ -1,0 +1,128 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* custom style */
+
+html, body {
+    font-family: Arial, Helvetica, sans-serif;
+    display: grid;
+    height: 100%; 
+    margin: 2em;
+}
+
+.center_container {
+    margin: auto;   
+}
+
+.clock {
+    width: 30em;
+    height: 30em;
+    position: absolute;
+    left: 50%;
+    margin: -15em 0 0 -15em;
+    background: rgba(255, 158, 44, 0.7);
+    border-radius: 50%;
+}
+
+.hours {
+    background: #000;
+    height: 20%;
+    left: 48.75%;
+    position: absolute;
+    top: 30%;
+    transform-origin: 50% 100%;
+    width: 2.5%;
+}
+
+.minutes {
+    background: #000;
+    height: 40%;
+    left: 49%;
+    position: absolute;
+    top: 10%;
+    transform-origin: 50% 100%;
+    width: 2%;
+}
+
+.seconds {
+    background: #000;
+    height: 50%;
+    left: 49.5%;
+    position: absolute;
+    top: 10%;
+    transform-origin: 50% 80%;
+    width: 1%;
+    z-index: 8;
+}
+
+.digits {
+    position: absolute;
+    font-size: 420%;
+    z-index: 999;
+}
+
+.digits.number12 {
+    left: 42%;
+    top: 5%;
+}
+
+.digits.number3 {
+    right: 5%;
+    top: 42%;
+}
+
+.digits.number6 {
+    left: 45.5%;
+    bottom: 5%;
+}
+
+.digits.number9 {
+    left: 5%;
+    top: 42%;
+}
