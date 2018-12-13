@@ -53,58 +53,72 @@ html, body {
     font-family: Arial, Helvetica, sans-serif;
     display: grid;
     height: 100%; 
-    margin: 2em;
+    background: rgba(254, 157, 45, 0.2);
 }
 
 .center_container {
-    margin: auto;   
+    margin: auto;
 }
 
-.clock {
+.watchface {
     width: 30em;
     height: 30em;
     position: absolute;
-    left: 50%;
-    margin: -15em 0 0 -15em;
-    background: rgba(255, 158, 44, 0.7);
+    margin: -17em 0 0 -17em;
+    background: url('../img/cat.jpg');
+    background-position: 20% 30%;
+    /* background: rgba(254, 157, 45, 0.7); */
     border-radius: 50%;
+    border: 2em solid #000;
 }
 
-.hours {
-    background: #000;
+.axis {
+    background: rgb(255, 255, 255);
+    width: 7%;
+    height: 7%;
+    position: absolute;
+    left: 46.5%;
+    top: 46.5%;
+    border-radius: 50%;
+    z-index: 999;
+}
+
+.watch_hands {
+    background: rgb(255, 255, 255);
+}
+
+.watch_hands.hours {
     height: 20%;
     left: 48.75%;
     position: absolute;
     top: 30%;
     transform-origin: 50% 100%;
     width: 2.5%;
-    transition: transform 0.3s cubic-bezier(.4,2.08,.55,.44);
+    /* transition: transform 0.3s cubic-bezier(.4,2.08,.55,.44); */
 }
 
-.minutes {
-    background: #000;
+.watch_hands.minutes {
     height: 40%;
     left: 49%;
     position: absolute;
     top: 10%;
     transform-origin: 50% 100%;
     width: 2%;
-    transition: transform 0.3s cubic-bezier(.4,2.08,.55,.44);
+    /* transition: transform 0.3s cubic-bezier(.4,2.08,.55,.44); */
 }
 
-.seconds {
-    background: #000;
+.watch_hands.seconds {
     height: 50%;
     left: 49.5%;
     position: absolute;
     top: 10%;
     transform-origin: 50% 80%;
     width: 1%;
-    z-index: 999;
-    transition: transform 0.3s cubic-bezier(.4,2.08,.55,.44);
+    /* transition: transform 0.3s cubic-bezier(.4,2.08,.55,.44); */
 }
 
 .digits {
+    color: rgb(255, 255, 255);
     position: absolute;
     font-size: 420%;
     z-index: 999;
