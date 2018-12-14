@@ -1,3 +1,4 @@
+//Generating and appending watchface indications
 const watchfaceDiv = document.querySelector('.watchface');
 let numbers = [12, 3, 6, 9];
 for (i = 0; i < 4; i++) {
@@ -6,34 +7,39 @@ for (i = 0; i < 4; i++) {
     digits.textContent = numbers[i];
     watchfaceDiv.appendChild(digits);
 }
-
-function moveClockHands(date) {
+function moveClockHands() {
     date = new Date;
+    let minutes = date.getMinutes();
+    let hours = date.getHours();
+    let seconds = date.getSeconds();
     let hands = [
         {
             hand: 'hours',
-            angle: 30 * (date.getHours()%12) + (date.getMinutes()/60)
+            // 12h = 360°, 1h = 30°, multiplied by current hour count + hour fraction converted from minutes
+            angle: 30 * (hours%12) + (minutes/60)
         },
         {
+            // 1m = 6°
             hand: 'minutes',
-            angle: 6 * date.getMinutes()
+            angle: 6 * minutes + seconds/60
         },
         {
+            // 1m = 6°
             hand: 'seconds',
-            angle: s = 6 * date.getSeconds()
+            angle: s = 6 * seconds
         }
     ]
     for (element of hands) {
         let hand = element.hand;
+
+        // selecting one hand
         let handDiv = document.querySelector(`.${hand}`);
+        
+        // and rotating it
         handDiv.style.cssText = `transform:rotate(${element.angle}deg);`;
 
+        // prevents hand's transition from 360° to 0° by removing transition property
+        handDiv.style.transition = `${hands[2].angle === 0 ? 'none' : ''}`
     }
-    setTimeout(moveClockHands, 1000);
 }
-
-
-let date = new Date;
-window.addEventListener('load', moveClockHands(date));
-
-//moveClockHands();
+setInterval(moveClockHands, 1000);

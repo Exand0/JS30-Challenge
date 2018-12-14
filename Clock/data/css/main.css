@@ -85,6 +85,8 @@ html, body {
 
 .watch_hands {
     background: rgb(255, 255, 255);
+    transition: all 0.05s;
+    transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
 }
 
 .watch_hands.hours {
@@ -94,7 +96,6 @@ html, body {
     top: 30%;
     transform-origin: 50% 100%;
     width: 2.5%;
-    /* transition: transform 0.3s cubic-bezier(.4,2.08,.55,.44); */
 }
 
 .watch_hands.minutes {
@@ -104,7 +105,6 @@ html, body {
     top: 10%;
     transform-origin: 50% 100%;
     width: 2%;
-    /* transition: transform 0.3s cubic-bezier(.4,2.08,.55,.44); */
 }
 
 .watch_hands.seconds {
@@ -114,7 +114,6 @@ html, body {
     top: 10%;
     transform-origin: 50% 80%;
     width: 1%;
-    /* transition: transform 0.3s cubic-bezier(.4,2.08,.55,.44); */
 }
 
 .digits {
