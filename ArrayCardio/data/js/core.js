@@ -23,36 +23,76 @@ const people = ['Beck, Glenn', 'Becker, Carl', 'Beckett, Samuel', 'Beddoes, Mick
 // Array.prototype.filter()
 // 1. Filter the list of inventors for those who were born in the 1500's
 
-console.log(inventors.filter(inventor => { if (inventor.year < 1600 && inventor.year > 1499) return inventor;}));
+console.table(inventors.filter(inventor => { if (inventor.year < 1600 && inventor.year > 1499) return inventor;}));
 console.log('\n');
 
 // Array.prototype.map()
 // 2. Give us an array of the inventors' first and last names
 
-console.log(inventors.map(inventor => { return {first: inventor.first, last: inventor.last}; }));
+console.table(inventors.map(inventor => { return {first: inventor.first, last: inventor.last}; }));
 console.log('\n');
 
 // Array.prototype.sort()
 // 3. Sort the inventors by birthdate, oldest to youngest
 
-console.log(inventors.sort( (a,b) => { 
-  return b.year - a.year;
-}));
+console.table(inventors.sort( (a,b) => { return b.year - a.year; }));
+console.log('\n');
 
 
 // Array.prototype.reduce()
 // 4. How many years did all the inventors live?
 
+console.table('Total years lived:' + inventors.reduce((yearsTotal, inventor) => yearsTotal+(inventor.passed - inventor.year), 0));
+console.log('\n');
+
 // 5. Sort the inventors by years lived
+
+console.table(inventors.sort( (a, b) => { 
+  return ((a.passed - a.year) > (b.passed - b.year) ? -1 : 1); 
+}));
+console.log('\n');
+
+
 
 // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
 // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+
+// const queryDiv = document.querySelector('.mw-category');
+// const mwLinks = Array.from(queryDiv.querySelectorAll('a'));
+// let streetsOfParis = mwLinks.map(link => link.textContent).filter(name => {
+//   if (name.includes('de')) return name;
+// })
+// console.log(streetsOfParis);
+// console.log('\n');
 
 
 // 7. sort Exercise
 // Sort the people alphabetically by last name
 
+console.log(people.sort( (a,b) => {
+  return a[0] > b[0] ? -1 : 1; 
+}));
+console.log('\n');
+
 // 8. Reduce Exercise
 // Sum up the instances of each of these
 const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
 
+let transport = data.reduce( (memory, current) => {
+  if (!memory.includes(current)) {
+    memory.push(current);
+  }
+  return memory;
+}, [])
+
+console.log(transport);
+
+let transport2 = data.reduce( (memory, current) => {
+  if (!memory[current]) {
+    memory[current] = 0;
+  }
+  memory[current]++;
+  return memory;
+}, {})
+
+console.log(transport2);
