@@ -28,20 +28,19 @@ function addFilter() {
         return;
     });
 
+    inactiveImages.forEach(div => {
+        if (activeImages.length === 0) {
+            div.classList.remove('overlay');
+        } else {
+            div.classList.add('overlay');
+        }
+    })
+
     activeImages.forEach(div => {
         div.classList.remove('overlay');
     })
-
-    inactiveImages.forEach(div => {
-        div.classList.add('overlay');
-    })
-
-    if (activeImages.length === 0) {  
-        inactiveImages.forEach(div => {
-            div.classList.remove('overlay');
-        })
-    }
 }
 
 galContainer.addEventListener('click', toggleImageStyle);
 galContainer.addEventListener('transitionend', addTextStyle);
+
