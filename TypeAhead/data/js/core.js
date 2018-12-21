@@ -20,18 +20,19 @@ function displayResult() {
     const matched = matchString(cities, this.value);
     const html = matched.map(place => {
         const regEx = new RegExp(this.value, 'gi');
-        let searchedCity = place.city.replace(regEx, `<span class="highlighted">${this.value}</span>`);
+        let searchedCity = place.city.replace(regEx, `<span class="highlighted">${this.value.toLowerCase()}</span>`);
         let searchedState = place.state.replace(regEx, `<span class="highlighted">${this.value}</span>`);
         
         return `
             <li>
                 <span class="name">${searchedCity}, ${searchedState}</span>
-                <span class="population">${place.population}</span>
+                <span class="population">Population: ${place.population}</span>
             </li>
         `
     }).join(' ');
     suggestions.innerHTML = html;
 }
+
 
 let searchField = document.querySelector('.searchfield');
 let suggestions = document.querySelector('.suggestions');
