@@ -89,4 +89,8 @@ ul.suggestions li {
     transform: perspective(100px) rotateX(-2deg) translateY(3px);
     background: linear-gradient(to top,  #ffffff 0%,#EFEFEF 100%);
 }
+
+.highlighted {
+    background: yellow;
+}
   
