@@ -42,22 +42,4 @@ searchField.addEventListener('keyup', displayResult);
 
 fetchData(link);
 
-// // function checkArray(arr) {
-// //     new Promise((resolve, reject) => {
-// //         while(true) {
-// //             if (arr.length != 0) {
-// //                 resolve(arr);
-// //             }
-// //         }
-// //     });
-// // }
-
-// setTimeout("console.log('test')", 10000);
-
-// checkArray(cities).then((citiesChecked => {
-//     console.log(matchString(citiesChecked, 'Moscow'));
-// }))
-//console.log(matchString(cities, 'Moscow'));
-// console.log(cities.length);
-
 
