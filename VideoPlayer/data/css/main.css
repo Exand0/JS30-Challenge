@@ -48,3 +48,79 @@ table {
 }
 
 /* custom style */
+
+body, html {
+	height: 100%;
+	display: grid;
+}
+
+.player {
+	margin: auto;
+}
+
+.media-control {
+	padding: 0 0.5em 0 0.5em;
+	display: none;
+	position: relative;
+}
+
+#toggle {
+	position: absolute;
+	left: 0.4em;
+	top: 0.2em;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+
+#progress {
+	position: absolute;
+	left: 2em;
+	top: 0.3em;
+	display: block;
+	margin: 0 0.5em 0 0.5em;
+	/* width: 100%; */
+}
+
+#progress-bar {
+	width: 1em;
+}
+
+#forward {
+	display: inline-block;
+	position: absolute;
+	top: 0.2em;
+	left: 11.5em;
+	vertical-align: middle;
+	padding-left: 0.5em;
+}
+
+#backward {
+	position: absolute;
+	left: 10.5em;
+	top: 0.2em;
+	vertical-align: middle;
+}
+
+#mute {
+	position: absolute;
+	top: 0.2em;
+	right: 9em;
+	vertical-align: middle;
+}
+
+#vol {
+	position: absolute;
+	top: 0.11em;
+	right: 2em;
+	vertical-align: middle;
+	width: 9em;
+}
+
+#full {
+	position: absolute;
+	right: 0.4em;
+	top: 0.2em;
+	/* vertical-align: middle; */
+
+}
