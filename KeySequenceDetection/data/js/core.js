@@ -1,6 +1,7 @@
 let keys = [];
 let combination = 'hello';
 let toTest;
+let counter = 0;
 
 function checkSequence(arr, checkString) {
     let regEx = new RegExp(`${checkString}`, 'gi');
@@ -16,7 +17,24 @@ function addKeysToArray(e) {
     // console.log(keys);
     toTest = keys.join('');
     // console.log(toTest);
-    if (checkSequence(toTest, combination)) console.log('Correct!');
+    if (checkSequence(toTest, combination)) {
+        createElement();
+        counter++;
+        keys = [];
+    }
+}
+
+function createElement() {
+    let p;
+    let text = '';
+    if (counter > 0) {
+        p = document.querySelector('p');
+        text = ` x${counter}`;
+    } else {
+        p = document.createElement('p');
+        document.body.appendChild(p);
+    }
+    p.textContent = `Correct!${text}`;
 }
 
 window.addEventListener('keydown', addKeysToArray);
