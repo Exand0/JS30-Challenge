@@ -1,0 +1,144 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* custom style */
+
+html, body {
+    font-family: Arial, Helvetica, sans-serif;
+    display: grid;
+    height: 100%; 
+    background: rgba(254, 157, 45, 0.2);
+}
+
+.center_container {
+    margin: auto;
+}
+
+.watchface {
+    width: 30em;
+    height: 30em;
+    position: absolute;
+    margin: -17em 0 0 -17em;
+    background: url('../img/cat.jpg');
+    background-position: 20% 30%;
+    /* background: rgba(254, 157, 45, 0.7); */
+    border-radius: 50%;
+    border: 2em solid #000;
+}
+
+.axis {
+    background: rgb(255, 255, 255);
+    width: 7%;
+    height: 7%;
+    position: absolute;
+    left: 46.5%;
+    top: 46.5%;
+    border-radius: 50%;
+    z-index: 999;
+}
+
+.watch_hands {
+    background: rgb(255, 255, 255);
+    transition: all 0.05s;
+    transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+}
+
+.watch_hands.hours {
+    height: 20%;
+    left: 48.75%;
+    position: absolute;
+    top: 30%;
+    transform-origin: 50% 100%;
+    width: 2.5%;
+}
+
+.watch_hands.minutes {
+    height: 40%;
+    left: 49%;
+    position: absolute;
+    top: 10%;
+    transform-origin: 50% 100%;
+    width: 2%;
+}
+
+.watch_hands.seconds {
+    height: 50%;
+    left: 49.5%;
+    position: absolute;
+    top: 10%;
+    transform-origin: 50% 80%;
+    width: 1%;
+}
+
+.digits {
+    color: rgb(255, 255, 255);
+    position: absolute;
+    font-size: 420%;
+    z-index: 999;
+}
+
+.digits.number12 {
+    left: 42%;
+    top: 5%;
+}
+
+.digits.number3 {
+    right: 5%;
+    top: 42%;
+}
+
+.digits.number6 {
+    left: 45.5%;
+    bottom: 5%;
+}
+
+.digits.number9 {
+    left: 5%;
+    top: 42%;
+}
