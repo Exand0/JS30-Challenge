@@ -1,5 +1,6 @@
-// limits the rate at which a given function is executed
+const images = document.querySelectorAll('img');
 
+// limits the rate at which a given function is executed
 function debounce(func, wait, immediate) {
 	var timeout;
 	return function() {
@@ -14,3 +15,10 @@ function debounce(func, wait, immediate) {
 		if (callNow) func.apply(context, args);
 	};
 };
+
+function checkPosition(e) {
+    console.log(window.scrollY + window.innerHeight);
+    // console.log(e.pageY);
+}
+
+window.addEventListener('scroll', debounce(checkPosition));

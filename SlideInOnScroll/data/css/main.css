@@ -52,13 +52,38 @@ table {
 body, html {
 	font-family: Arial, Helvetica, sans-serif;
 	height: 100%;
+	background: rgb(248, 184, 115);
 }
 
 .container {
-	height: 100%;
-	background: rgb(28, 82, 163);
+	background: rgb(253, 249, 215);
+	margin: 0 20em;
+	overflow: auto;
 }
 
 p {
 	text-align: justify;
+	padding: 2em 2em 0 2em;
+}
+
+img {
+	width: 20em;
+}
+
+img.left {
+	padding: 2em;
+	float: left;
+}
+
+img.right {
+	padding: 2em;
+	float: right;
+}
+
+img.left.slide-in {
+	transform: translateX(-30%) scale(0.8);
+}
+
+img.right.slide-in {
+	transform: translateX(30%) scale(0.8);
 }
