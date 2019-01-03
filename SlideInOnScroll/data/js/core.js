@@ -17,7 +17,25 @@ function debounce(func, wait, immediate) {
 };
 
 function checkPosition(e) {
-    console.log(window.scrollY + window.innerHeight);
+	images.forEach(image => {
+		let slideInAt = (window.scrollY + window.innerHeight) - (image.height/2);
+		let imageBottom = image.offsetTop + image.height;
+		let halfShown = slideInAt > image.offsetTop;
+		let notScrolledPassed = window.scrollY < imageBottom;
+		if (halfShown && notScrolledPassed) {
+			image.classList.add('active');
+		} else {
+			image.classList.remove('active');
+		}
+		console.log(halfShown);
+	})
+		// let slideInAt = (window.scrollY + window.innerHeight) - (images[1].height/2);
+		// let imageBottom = images[1].offsetTop + images[1].height;
+		// let halfShown = slideInAt > images[1].offsetTop;
+		// console.log(slideInAt);
+		// console.log(images[1].offsetTop);
+		// console.log(halfShown);
+    
     // console.log(e.pageY);
 }
 

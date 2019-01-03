@@ -53,12 +53,13 @@ body, html {
 	font-family: Arial, Helvetica, sans-serif;
 	height: 100%;
 	background: rgb(248, 184, 115);
+	font-size: 1.2em;
 }
 
 .container {
 	background: rgb(253, 249, 215);
-	margin: 0 20em;
-	overflow: auto;
+	margin: 0 15em;
+	overflow: hidden;
 }
 
 p {
@@ -68,22 +69,26 @@ p {
 
 img {
 	width: 20em;
+	opacity: 0;
 }
 
 img.left {
 	padding: 2em;
 	float: left;
+	transform: translateX(-30%) scale(0.8);
 }
 
 img.right {
 	padding: 2em;
 	float: right;
-}
-
-img.left.slide-in {
-	transform: translateX(-30%) scale(0.8);
-}
-
-img.right.slide-in {
 	transform: translateX(30%) scale(0.8);
+}
+
+img.slide-in {
+	 transition: all .5s;
+}
+
+img.active {
+	opacity: 1;
+	transform: translate(0) scale(1);
 }
