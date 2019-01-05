@@ -82,6 +82,14 @@ input.text-input {
 	width: 20em;
 }
 
+ul li {
+	border-bottom: 0.01em solid rgb(0, 0, 0);
+}
+
+ul li:last-child {
+	border-bottom: none;
+}
+
 
 h1 {
 	font-size: 2em;
