@@ -61,7 +61,7 @@ body, html {
 	margin: auto;
 	padding: 2em;
 	box-shadow: 0 0 0 1em rgba(201, 195, 195, 0.5);
-	text-align: center;
+	
 }
 
 input {
@@ -80,6 +80,10 @@ label {
 
 input.text-input {
 	width: 20em;
+}
+
+ul {
+	margin: 2em 4em;
 }
 
 ul li {
