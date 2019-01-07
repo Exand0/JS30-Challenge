@@ -2,8 +2,10 @@ let container = document.querySelector('.container');
 let form = container.querySelector('.add');
 let inputText = container.querySelector('.text-input');
 let ul = container.querySelector('ul');
+let resetButton = container.querySelector('.reset-button');
+let data = [];
 
-function addEntry(e) {
+function buildEntry(e) {
     e.preventDefault();
     let listEl = document.createElement('li');
     let label = document.createElement('label');
@@ -14,12 +16,21 @@ function addEntry(e) {
 
     label.textContent = inputText.value;
     inputText.value = '';
-
     listEl.innerHTML += checkbox.outerHTML + label.outerHTML;
-    ul.appendChild(listEl); 
+    // local storage is constantly overwritten
+    data.push(JSON.stringify(listEl.outerHTML));
+    addEntry();
 
-    addToStorage('ul', ul.outerHTML);
-    console.log(localStorage.getItem('ul'));
+}
+
+function addEntry() {
+    data.forEach(li => {
+        // console.log(JSON.parse(li));
+        ul.innerHTML += (JSON.parse(li)); 
+    })
+    addToStorage('ulData', data);
+    data = [];
+    // console.log(localStorage.getItem('ulData'));
 }
 
 function addToStorage(key, value) {
@@ -27,16 +38,26 @@ function addToStorage(key, value) {
 }
 
 function getFromStorage(key) {
-    // console.log(localStorage.getItem(key))
+    console.log(localStorage.getItem(key))
     return localStorage.getItem(key);
 }
 
-function checkData() {
-    if (getFromStorage) {
-        ul = getFromStorage('ul');
-        // console.log('ul');
+function checkLocalStorage() {
+    if (getFromStorage('ulData')) {
+        data = localStorage.getItem('ulData');
+        console.log(data.length);
+        // Data is not an array anymore
+        addEntry(data);
+        data = [];
     }
 }
 
-form.addEventListener('submit', addEntry);
-// checkData()
+function resetData() {
+    data = [];
+    localStorage.removeItem('ulData');
+}
+
+form.addEventListener('submit', buildEntry);
+resetButton.addEventListener('click', resetData);
+checkLocalStorage();
+
