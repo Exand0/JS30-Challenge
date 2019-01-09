@@ -90,6 +90,10 @@ ul li {
 	border-bottom: 0.01em solid rgb(0, 0, 0);
 }
 
+ul li:first-child {
+	border-top: none;
+}
+
 ul li:last-child {
 	border-bottom: none;
 }
