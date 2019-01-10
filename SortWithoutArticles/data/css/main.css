@@ -48,3 +48,20 @@ table {
 }
 
 /* custom style */
+
+body, html {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+	background: url(../img/img.jpg);
+}
+
+ul {
+	padding: 0.5em;
+	text-align: center;
+	display: block;
+	background: white;
+	width: 20em;
+	margin: 1em auto;
+}
