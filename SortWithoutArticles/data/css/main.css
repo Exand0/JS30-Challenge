@@ -58,10 +58,20 @@ body {
 }
 
 ul {
-	padding: 0.5em;
-	text-align: center;
 	display: block;
-	background: white;
+	background: rgba(255, 255, 255, 0.9);
 	width: 20em;
 	margin: 1em auto;
+	box-shadow: 0 0 0 1em rgba(94, 82, 82, 0.8);
+}
+
+li {
+	padding: 0.5em;
+	font-size: 1.5em;
+	border-bottom: rgb(0,0,0) solid 0.05em;
+	list-style: square inside;
+}
+
+li:last-child {
+	border-bottom: none;
 }
