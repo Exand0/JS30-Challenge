@@ -48,3 +48,12 @@ table {
 }
 
 /* custom style */
+
+body, html {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+ul {
+	margin: 0 auto;
+	width: 5%;
+}
