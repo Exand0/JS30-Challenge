@@ -49,22 +49,20 @@ table {
 
 /* custom style */
 
+/* :root {
+	--degree: 0;
+} */
+
 body, html {
 	font-family: Arial, Helvetica, sans-serif;
-	height: 100%;
-	background-size: cover;
-	height: 100%;
-	overflow: hidden;
+	height: 100%;	
 }
 
 .photobooth {
 	background: rgb(245, 182, 9);
-	height: 100%;
+	min-height: 100%;
 	padding: 3em;
-}
-
-.camera-stream {
-	
+	background-size: cover;
 }
 
 .controls {
@@ -76,8 +74,28 @@ video {
 	display: block;
 	width: 50%;
 	margin: 0 auto;
+	box-shadow: 0 0 0 2em rgba(255, 255, 255, 0.5);
+}
+
+.screenshot-container {
+	margin: 4em 4em;
+	padding: 3em;
 }
 
 canvas {
+	margin: 1em;
+	box-shadow: 0 0 0 1em rgba(255,255,255, 0.8);
+	/* transform: rotate(var(--degree)); */
+	transform: rotate(0deg);
+}
 
+.take-photo {
+	/* border: rgb(0,0,0) solid 0.01em; */
+	border: none;
+	height: 2.09em;
+	/* margin-bottom: 0.2em; */
+}
+
+.take-photo:hover {
+	background: white;
 }
