@@ -44,10 +44,10 @@ function takeAndAddScreenshot() {
 function takeScreenshot(videoEl) {
     let canvas = document.createElement('canvas');
     let ctx = canvas.getContext('2d');
-    canvas.width = canvas.width*ratio;
-    canvas.height = canvas.width/ratio;
-    ctx.fillRect(0,0, h, parseInt(canvas.width/ratio));
-    ctx.drawImage(videoEl, 0,0, h, parseInt(canvas.width/ratio));
+    // canvas.width = canvas.width*ratio;
+    // canvas.height = canvas.width/ratio;
+    ctx.fillRect(0,0, w/3, h/3);
+    ctx.drawImage(videoEl, 0,0, w/3, h/3);
     // console.log((ratio));
     return canvas;
 }
