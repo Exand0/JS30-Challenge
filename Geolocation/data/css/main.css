@@ -48,3 +48,25 @@ table {
 }
 
 /* custom style */
+
+body, html {
+	margin: 0;
+	font-family: Arial, Helvetica, sans-serif;
+	min-height: 100em;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	background: radial-gradient(black 15%, transparent 16%) 0 0, radial-gradient(black 15%, transparent 16%) 8px 8px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px;
+	background-color: rgba(0, 0, 0, 0);
+	/* background-attachment: scroll, scroll, scroll, scroll; */
+	background-size: auto auto, auto auto, auto auto, auto auto;
+	background-color: #282828;
+	background-size: 16px 16px;
+	background-attachment: fixed;
+}
+
+svg {
+	width: 25em;
+}
+
