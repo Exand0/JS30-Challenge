@@ -81,6 +81,9 @@ li {
 
 .content {
 	margin: 2em 20vw;
+	position: relative;
+
+	
 }
 
 p {
@@ -105,6 +108,25 @@ a {
 	padding: 0 0.3em;
 }
 
-.link:hover {
-	background: rgb(223, 132, 223); 
+
+.highlight {
+	display: block;
+	background: white;
+	border-radius: 1em;
+	position: absolute;
+	transition: all 1s;
+	/* z-index: 999; */
 }
+
+/* .highlight {
+	transition: all 0.2s;
+	border-bottom: 2px solid white;
+	position: absolute;
+	top: 0;
+	background: white;
+	left: 0;
+	z-index: -1;
+	border-radius: 20px;
+	display: block;
+	box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  } */
