@@ -9,10 +9,14 @@ function highlightLink() {
     highlight.style.width = `${linkCoords.width}px`;
     highlight.style.height = `${linkCoords.height}px`;
     highlight.style.transform = `translate(${linkCoords.left}px, ${linkCoords.top}px)`;
+    // highlight.style.top = `${linkCoords.top}`;
+    // highlight.style.left = `${linkCoords.left}`;
+
 
     // highlight.style.width = `${linkCoords.width}px`;
     // highlight.style.height = `${linkCoords.height}px`;
     // highlight.style.transform = `translate(${linkCoords.left}px, ${linkCoords.top}px)`;
+    console.log(this);
     console.log(linkCoords);
 }
 
