@@ -51,8 +51,10 @@ table {
 
 body, html {
 	font-family: Arial, Helvetica, sans-serif;
-	/* background: rgb(252, 247, 233); */
+}
 
+body {
+	background: rgb(252, 247, 233);
 }
 
 .nav {
@@ -107,7 +109,7 @@ a {
 }
 
 .link {
-	background: rgb(228, 209, 228);
+	background: rgba(228, 209, 228, 0.5);
 	border-radius: 1em;
 	padding: 0 0.3em;
 }
@@ -120,8 +122,8 @@ a {
 	background: rgb(223, 132, 223);
 	border-radius: 1em;
 	position: absolute;
-	transition: all 1s;
-	z-index: 999;
+	transition: all 0.3s;
+	z-index: -1;
 }
 
 /* .highlight {

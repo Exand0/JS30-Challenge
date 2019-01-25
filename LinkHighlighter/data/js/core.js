@@ -8,7 +8,7 @@ function highlightLink() {
     let linkCoords = this.getBoundingClientRect();
     highlight.style.width = `${linkCoords.width}px`;
     highlight.style.height = `${linkCoords.height}px`;
-    highlight.style.transform = `translate(${linkCoords.left}px, ${linkCoords.top}px)`;
+    highlight.style.transform = `translate(${linkCoords.left}px, ${linkCoords.top + window.scrollY}px)`;
     // highlight.style.top = `${linkCoords.top}`;
     // highlight.style.left = `${linkCoords.left}`;
 
@@ -18,6 +18,7 @@ function highlightLink() {
     // highlight.style.transform = `translate(${linkCoords.left}px, ${linkCoords.top}px)`;
     console.log(this);
     console.log(linkCoords);
+    console.log(container);
 }
 
 triggers.forEach(trigger => trigger.addEventListener('mouseenter', highlightLink));
