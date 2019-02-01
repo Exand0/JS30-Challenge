@@ -2,10 +2,9 @@ const navEntries = document.querySelectorAll('ul.nav-ul > li');
 const dropdownHighlighter = document.querySelector('.dropdown-highlighter');
 const navBar = document.querySelector('.nav');
 
-
-
 function handleEnter(e) {
     this.classList.add('active');
+    setTimeout(() => this.classList.add('active-visible'), 20);
     
     const dropdown = this.querySelector('.dropdown');
     let dropdownCoords = dropdown.getBoundingClientRect();
@@ -16,11 +15,16 @@ function handleEnter(e) {
     dropdownHighlighter.style.width = `${dropdownCoords.width}px`; 
     dropdownHighlighter.style.height = `${dropdownCoords.height}px`; 
     dropdownHighlighter.style.transform = `translate(${dropdownCoords.x}px, ${dropdownCoords.y+navCoords.y}px)`;
+    updateCss(dropdownCoords.width);
 }
 
 function handleLeave(e) {
-    this.classList.remove('active');
+    this.classList.remove('active', 'active-visible');
     dropdownHighlighter.classList.remove('open');
+}
+
+function updateCss(width) {
+    document.documentElement.style.setProperty('--after-width', `${width}px`)
 }
 
 function moveHighlighter(e) {
