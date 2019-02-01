@@ -48,3 +48,35 @@ table {
 }
 
 /* custom style */
+
+body, html {
+	font-family: Arial, Helvetica, sans-serif;
+	/* height: 100%; */
+}
+
+.tile-container {
+	margin: 1em;
+	height: 100%;
+	background: rgb(119, 188, 245);
+	/* overflow-x: scroll; */
+	padding: 5em;
+	perspective: 50em;
+	white-space: nowrap;
+
+}
+
+.tile {
+	display: inline-flex;
+	width: 20vw;
+	height: 70vh;
+	box-shadow: 0 0 0 1em rgba(90, 87, 87, 0.5);
+	margin: 1em;
+}
+
+.tile:nth-child(odd) {
+	transform: scale(1.414) rotateY(-45deg);
+}
+
+.tile:nth-child(even) {
+	transform: scale(1.414) rotateY(45deg);
+}
