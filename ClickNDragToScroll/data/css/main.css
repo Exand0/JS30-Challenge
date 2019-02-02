@@ -55,28 +55,34 @@ body, html {
 }
 
 .tile-container {
-	margin: 1em;
+	transform: scale(0.95);
 	height: 100%;
 	background: rgb(119, 188, 245);
-	/* overflow-x: scroll; */
-	padding: 5em;
-	perspective: 50em;
+	overflow-x: scroll;
+	padding: 9em;
+	perspective: 70em;
 	white-space: nowrap;
+	transition: all 0.5s;
+	cursor: pointer;
 
+}
+
+.tile-container.active {
+	transform: none;
 }
 
 .tile {
 	display: inline-flex;
-	width: 20vw;
-	height: 70vh;
-	box-shadow: 0 0 0 1em rgba(90, 87, 87, 0.5);
+	width: 15vw;
+	height: 50.55vh;
+	box-shadow: 0 0 0 1em rgba(90, 87, 87, 1);
 	margin: 1em;
 }
 
 .tile:nth-child(odd) {
-	transform: scale(1.414) rotateY(-45deg);
+	transform: scale(1.414) rotateY(45deg);
 }
 
 .tile:nth-child(even) {
-	transform: scale(1.414) rotateY(45deg);
+	transform: scale(1.414) rotateY(-45deg);
 }
