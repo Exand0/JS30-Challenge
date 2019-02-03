@@ -64,8 +64,18 @@ body {
 }
 
 .speed-controller {
+	margin-left: 0.5em;
 	height: 22.4em;
 	width: 2em;
 	display: inline-block;
+	/* box-shadow: 0.5em 0 2em 0.5em rgb(185, 159, 8); */
+	box-shadow: 0 0 2em 0.5em rgb(185, 159, 8);
+}
+
+.speed-fill {
 	background: linear-gradient(to bottom, rgb(255, 227, 174), rgb(240, 182, 76) 30%, rgb(241, 118, 3) );
+}
+
+video {
+	box-shadow: 0 0 2em 0.5em rgb(185, 159, 8);
 }
