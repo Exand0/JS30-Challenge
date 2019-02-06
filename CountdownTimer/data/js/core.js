@@ -1,48 +1,53 @@
-// const addOneS = document.querySelector('.add-1s');
-// const addThirtyS = document.querySelector('.add-30s');
-// const addOneM = document.querySelector('.add-1m');
-// const addOneH = document.querySelector('.add-1h');
-// const addCustom = document.querySelector('.add-custom');
-// const reset = document.querySelector('.reset');
-
-const buttons = document.querySelectorAll('.nav ul li');
 const nav = document.querySelector('.nav');
+const buttons = nav.querySelectorAll('.nav ul li');
 const container = document.querySelector('.container');
-const countdownH1 = document.querySelector('.countdown');
+const countdownH1 = container.querySelector('.countdown');
+const inputCustomTime = nav.querySelector('input[type=number]');
 
 class CountdownTimer {
-    constructor(durationInSeconds, attachTo, displayEl) {
+    constructor(attachTo, displayEl) {
         this.attachTo = attachTo;
         // this.displayEl = displayEl || this.createDisplay();
+        this._isRunning = false;
+        this.updateRepeater = null;
         this.displayEl = displayEl;
         this.timeObj = {
-            hours: '',
-            minutes: '',
-            seconds: '',
-            duration: durationInSeconds,
-            // endDate: this.getStartingTime(),
-            // timeLeft: this.calcTimeLeft()
-            startDate: '',
-            endDate: '',
-            timeLeft: ''
+            hours: 0,
+            minutes: 0,
+            seconds: 0,
+            duration: 0,
+            startDate: 0,
+            endDate: 0,
+            timeLeft: 0
         }
     }
 
     startTimer() {
-        this.timeObj.startDate = Date.now();
+        console.log(this._isRunning);
+        if (this._isRunning == false) {
+            this.timeObj.startDate = Date.now();
+
+        }
         this.setEndDate();
-        this.updateDisplay();
+        if (this._isRunning == false) {
+            this.updateDisplay();
+            this._isRunning = true;
+        }
     }
     
     setEndDate() {
         this.timeObj.endDate = this.timeObj.startDate + this.timeObj.duration * 1000;
     }
 
+    setDuration(seconds) {
+        this.timeObj.duration += seconds;
+    }
+
     calcTimeLeft() {
-        this.timeObj.timeLeft = (this.timeObj.endDate - Date.now())/1000;
+        this.timeObj.timeLeft = Math.ceil((this.timeObj.endDate - Date.now())/1000);
 
         this.timeObj.hours = parseInt(this.timeObj.timeLeft/3600);
-        this.timeObj.minutes = parseInt(this.timeObj.timeLeft/60);
+        this.timeObj.minutes = parseInt((this.timeObj.timeLeft - (this.timeObj.hours*3600))/60);
         this.timeObj.seconds = parseInt(this.timeObj.timeLeft%60);
         return this.timeObj.timeLeft;
     }
@@ -58,99 +63,74 @@ class CountdownTimer {
         return displayEl;
     }
 
-    updateDisplay() {
-        let updateInterval = setInterval(() => {
-            this.calcTimeLeft();
-            this.displayEl.textContent = `
-            ${this.timeObj.hours != '' ? this.timeObj.hours + ':' : ''}
-            ${this.timeObj.minutes != '' ? this.timeObj.minutes + ':' : ''}
-            ${this.timeObj.seconds != '' ? this.timeObj.seconds : ''}`;
-            console.log(this.timeObj);
-            if (this.timeObj.timeLeft <= 0) clearInterval(updateInterval);
-        }, 1000);
+    display() {
+        let hours = this.timeObj.hours;
+        let minutes = this.timeObj.minutes;
+        let seconds = this.timeObj.seconds;
+        this.displayEl.textContent = `
+            ${hours != '' ? hours + (minutes != '' ? ' : ': '') : ''}
+            ${minutes != '' ? minutes + (seconds != '' ? ' : ' : '' ) : ''}
+            ${seconds != '' ? seconds : ''}`;       
+    
+    }  
 
-        // 
-            
+    updateDisplay(frequency=1000) {
+        this.calcTimeLeft();
+        this.display();
+        this.updateRepeater = setInterval(() => {
+            this.calcTimeLeft();
+            this.display()
+            if (this.timeObj.timeLeft < 1) clearInterval(this.updateRepeater);
+        }, frequency);
+        console.log(this.timeObj);
+    }
+
+    resetClock() {
+        clearInterval(this.updateRepeater);
+        console.log(this.timeObj);
+        for (let key in this.timeObj) {
+            this.timeObj[key] = 0;
+        }
+        this._isRunning = false;
+        this.display();
     }
 }
 
 function handleClick(e) {
     e.preventDefault();
     if (liEl = e.target.nodeName === 'LI') {
+        countdownClock.setDisplay(); 
         switch (e.target.className) {
             case 'add-1s':
-                console.log(e.target.className);
+                countdownClock.setDuration(1);
+                countdownClock.startTimer();
                 break;
             case 'add-30s':
-                console.log(e.target.className);
-                // debugger;
-                let countdownClock = new CountdownTimer(30, container, countdownH1);
-                countdownClock.setDisplay(); 
+                countdownClock.setDuration(30);
                 countdownClock.startTimer();
-                countdownClock.updateDisplay();              
                 break;
             case 'add-1m':
-                console.log(e.target.className);
+                countdownClock.setDuration(60);
+                countdownClock.startTimer();
                 break;
             case 'add-1h':
-                console.log(e.target.className);
+                countdownClock.setDuration(3600);
+                countdownClock.startTimer();
                 break;
             case 'add-custom':
-                console.log(e.target.className);
+                countdownClock.setDuration(30);
+                countdownClock.startTimer();
                 break;
             case 'reset':
-                console.log(e.target.className);
+                if (countdownClock) {
+                    countdownClock.resetClock()
+                    console.log(countdownClock);
+                }
                 break;
             }
     }
 }
 
-// function startCountdown(time) {
-//     let timeObj = {
-//         hours: '',
-//         minutes: '',
-//         seconds: '',
-//         timeLeft: 0,
-//         endDate: getStartingTime()
-//     }
-
-//     function getStartingTime() {
-//         return Date.now() + time * 1000;
-//     }
-
-//     function calc() {
-
-//         timeObj.timeLeft = (timeObj.endDate - Date.now())/1000;
-
-//         timeObj.hours = parseInt(timeObj.timeLeft/3600);
-//         timeObj.minutes = parseInt(timeObj.timeLeft/60);
-//         timeObj.seconds = parseInt(timeObj.timeLeft%60);
-
-//         if (timeObj.timeLeft <= 0) clearInterval(interval);
-//         console.log(timeObj);
-//     }
-//     calc();
-//     let interval = setInterval(calc, 1000);
-//     return timeObj;
-// }
-
-// function displayCountdown(timeObj) {
-//     let countDown;
-
-//     if (countDown = document.querySelector('.countdown')) {
-//         console.log('test');
-//         console.log(countDown);
-//     } else {
-//         countDown = document.createElement('h1');
-//         countDown.classList.add('countdown');
-//         container.appendChild(countDown);
-//     }
-
-//     countDown.textContent = `
-//         ${timeObj.hours != '' ? timeObj.hours + ':' : ''}
-//         ${timeObj.minutes != '' ? timeObj.minutes + ':' : ''}
-//         ${timeObj.seconds != '' ? timeObj.seconds : ''}`;
-// }
-
 nav.addEventListener('click', handleClick);
+let countdownClock = new CountdownTimer(container, countdownH1);
 
