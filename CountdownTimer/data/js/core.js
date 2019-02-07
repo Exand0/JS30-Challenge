@@ -1,16 +1,17 @@
 const nav = document.querySelector('.nav');
 const buttons = nav.querySelectorAll('.nav ul li');
 const container = document.querySelector('.container');
-const countdownH1 = container.querySelector('.countdown');
+// const countdownH1 = container.querySelector('.countdown');
 const inputCustomTime = nav.querySelector('input[type=number]');
 
 class CountdownTimer {
-    constructor(attachTo, displayEl) {
+    constructor(attachTo) {
         this.attachTo = attachTo;
-        // this.displayEl = displayEl || this.createDisplay();
+        this.displayEl, this.displayEndEl;
+        // this.displayEl = this.createDisplay();
+        // this.displayEndEl = this.createDisplay(secondary)
         this._isRunning = false;
         this.updateRepeater = null;
-        this.displayEl = displayEl;
         this.timeObj = {
             hours: 0,
             minutes: 0,
@@ -23,7 +24,8 @@ class CountdownTimer {
     }
 
     startTimer() {
-        console.log(this._isRunning);
+        if (!this.displayEl || this.displayEndEl) this.createDisplay();
+
         if (this._isRunning == false) {
             this.timeObj.startDate = Date.now();
 
@@ -34,13 +36,33 @@ class CountdownTimer {
             this._isRunning = true;
         }
     }
+
+    toggleTimer() {
+        if (this._isRunning) {
+            clearInterval(this.updateRepeater);
+            this._isRunning = false;
+            console.log('test');
+        } else if (!this._isRunning){
+            this.timeObj.startDate = Date.now(); 
+            this.setDuration(this.timeObj.timeLeft);
+            this.setEndDate();
+            this.updateDisplay();
+            this._isRunning = true;
+            console.log('test2');
+        }
+        console.log(this.timeObj);
+    }
     
     setEndDate() {
         this.timeObj.endDate = this.timeObj.startDate + this.timeObj.duration * 1000;
     }
 
-    setDuration(seconds) {
-        this.timeObj.duration += seconds;
+    setDuration(seconds, add) {
+        add ? this.timeObj.duration += seconds : this.timeObj.duration = seconds;
+    }
+
+    padNumbers(number) {
+        return number.toString(10).padStart(2, 0);
     }
 
     calcTimeLeft() {
@@ -49,18 +71,28 @@ class CountdownTimer {
         this.timeObj.hours = parseInt(this.timeObj.timeLeft/3600);
         this.timeObj.minutes = parseInt((this.timeObj.timeLeft - (this.timeObj.hours*3600))/60);
         this.timeObj.seconds = parseInt(this.timeObj.timeLeft%60);
-        return this.timeObj.timeLeft;
+        console.log(this.timeObj.timeLeft);
     }
 
-    setDisplay() {
-        if (!this.displayEl) this.createDisplay();
+    convSec(sec) {
+        let out = {
+            hours: parseInt(parseInt(sec/3600)),
+            minutes: parseInt((sec - (hours*3600))/60),
+            seconds: parseInt(sec%60)
+        }
     }
 
     createDisplay() {
-        let displayEl = document.createElement('h1');
-        displayEl.classList.add('countdown');
-        this.attachTo.appendChild(displayEl);
-        return displayEl;
+        this.displayEl = document.createElement('h1');
+        this.endEl = document.createElement('p');
+
+        this.displayEl.classList.add('countdown');
+        this.endEl.classList.add('countdown-end');
+
+        this.attachTo.appendChild(this.displayEl);
+        this.attachTo.appendChild(this.endEl);
+
+        this.displayEl.addEventListener('click', () => this.toggleTimer());
     }
 
     display() {
@@ -68,10 +100,10 @@ class CountdownTimer {
         let minutes = this.timeObj.minutes;
         let seconds = this.timeObj.seconds;
         this.displayEl.textContent = `
-            ${hours != '' ? hours + (minutes != '' ? ' : ': '') : ''}
-            ${minutes != '' ? minutes + (seconds != '' ? ' : ' : '' ) : ''}
-            ${seconds != '' ? seconds : ''}`;       
-    
+            ${hours != '' ? this.padNumbers(hours) + (this.padNumbers(minutes) != '' ? ' : ': '') : ''}
+            ${minutes != '' ? this.padNumbers(minutes) + (this.padNumbers(seconds) != '' ? ' : ' : '' ) : ''}
+            ${seconds != '' ? this.padNumbers(seconds) : ''}`; 
+        this.displayEndEl.textContent = `${this.timeObj.endDate}`     
     }  
 
     updateDisplay(frequency=1000) {
@@ -80,14 +112,12 @@ class CountdownTimer {
         this.updateRepeater = setInterval(() => {
             this.calcTimeLeft();
             this.display()
-            if (this.timeObj.timeLeft < 1) clearInterval(this.updateRepeater);
+            if (this.timeObj.timeLeft < 1) this.resetClock();
         }, frequency);
-        console.log(this.timeObj);
     }
 
     resetClock() {
         clearInterval(this.updateRepeater);
-        console.log(this.timeObj);
         for (let key in this.timeObj) {
             this.timeObj[key] = 0;
         }
@@ -99,26 +129,30 @@ class CountdownTimer {
 function handleClick(e) {
     e.preventDefault();
     if (liEl = e.target.nodeName === 'LI') {
-        countdownClock.setDisplay(); 
+        // countdownClock.setDisplay(); 
         switch (e.target.className) {
+            case 'pause':
+                countdownClock.toggleTimer()
+                break;
             case 'add-1s':
-                countdownClock.setDuration(1);
+                countdownClock.setDuration(1, true);
                 countdownClock.startTimer();
                 break;
             case 'add-30s':
-                countdownClock.setDuration(30);
+                countdownClock.setDuration(30, true);
                 countdownClock.startTimer();
                 break;
             case 'add-1m':
-                countdownClock.setDuration(60);
+                countdownClock.setDuration(60, true);
                 countdownClock.startTimer();
                 break;
             case 'add-1h':
-                countdownClock.setDuration(3600);
+                countdownClock.setDuration(3600, true);
                 countdownClock.startTimer();
                 break;
             case 'add-custom':
-                countdownClock.setDuration(30);
+                countdownClock.setDuration(inputCustomTime.valueAsNumber, true);
+                inputCustomTime.value = '';
                 countdownClock.startTimer();
                 break;
             case 'reset':
@@ -132,5 +166,5 @@ function handleClick(e) {
 }
 
 nav.addEventListener('click', handleClick);
-let countdownClock = new CountdownTimer(container, countdownH1);
+let countdownClock = new CountdownTimer(container);
 

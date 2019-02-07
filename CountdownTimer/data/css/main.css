@@ -70,7 +70,6 @@ body, html {
 
 }
 
-
 .nav ul li:hover {
 	background: rgb(247, 180, 57); 
 	color: rgb(255,255,255);
@@ -92,6 +91,10 @@ input[type=number] {
 
 .countdown {
 	font-size: 5em;
+}
+
+.countdown:hover {
+	cursor: pointer;
 }
 
 .countdown-end {
