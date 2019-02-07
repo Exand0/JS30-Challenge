@@ -24,7 +24,7 @@ class CountdownTimer {
     }
 
     startTimer() {
-        if (!this.displayEl || this.displayEndEl) this.createDisplay();
+        if (!(this.displayEl || this.displayEndEl)) this.createDisplay();
 
         if (this._isRunning == false) {
             this.timeObj.startDate = Date.now();
@@ -68,29 +68,34 @@ class CountdownTimer {
     calcTimeLeft() {
         this.timeObj.timeLeft = Math.ceil((this.timeObj.endDate - Date.now())/1000);
 
-        this.timeObj.hours = parseInt(this.timeObj.timeLeft/3600);
-        this.timeObj.minutes = parseInt((this.timeObj.timeLeft - (this.timeObj.hours*3600))/60);
-        this.timeObj.seconds = parseInt(this.timeObj.timeLeft%60);
-        console.log(this.timeObj.timeLeft);
+        let time = this.convFromSec(this.timeObj.timeLeft);
+
+        this.timeObj.hours = time.hours;
+        this.timeObj.minutes = time.minutes;
+        this.timeObj.seconds = time.seconds;
     }
 
-    convSec(sec) {
-        let out = {
-            hours: parseInt(parseInt(sec/3600)),
-            minutes: parseInt((sec - (hours*3600))/60),
-            seconds: parseInt(sec%60)
+    convFromSec(sec) {
+        let time = {
+            hours: '',
+            minutes: '',
+            seconds: ''
         }
+        time.hours = parseInt(sec/3600);
+        time.minutes = parseInt((sec - time.hours*3600)/60);
+        time.seconds = parseInt(sec%60);
+        return time;
     }
 
     createDisplay() {
         this.displayEl = document.createElement('h1');
-        this.endEl = document.createElement('p');
+        this.displayEndEl = document.createElement('p');
 
         this.displayEl.classList.add('countdown');
-        this.endEl.classList.add('countdown-end');
+        this.displayEndEl.classList.add('countdown-end');
 
         this.attachTo.appendChild(this.displayEl);
-        this.attachTo.appendChild(this.endEl);
+        this.attachTo.appendChild(this.displayEndEl);
 
         this.displayEl.addEventListener('click', () => this.toggleTimer());
     }
@@ -100,10 +105,14 @@ class CountdownTimer {
         let minutes = this.timeObj.minutes;
         let seconds = this.timeObj.seconds;
         this.displayEl.textContent = `
-            ${hours != '' ? this.padNumbers(hours) + (this.padNumbers(minutes) != '' ? ' : ': '') : ''}
-            ${minutes != '' ? this.padNumbers(minutes) + (this.padNumbers(seconds) != '' ? ' : ' : '' ) : ''}
+            ${hours != '' ? this.padNumbers(hours) + (this.padNumbers(minutes) != 0 ? ' : ': '') : ''}
+            ${minutes != '' ? this.padNumbers(minutes) + (this.padNumbers(seconds) != 0 ? ' : ' : '' ) : ''}
             ${seconds != '' ? this.padNumbers(seconds) : ''}`; 
-        this.displayEndEl.textContent = `${this.timeObj.endDate}`     
+            
+            console.log(`${hours} : ${minutes} : ${seconds}`);
+
+        // let endTime = this.convFromSec(this.timeObj.endDate - this.timeObj.startDate);
+        // this.displayEndEl.textContent = `${endTime.hours} : ${endTime.minutes}`     
     }  
 
     updateDisplay(frequency=1000) {
