@@ -1,0 +1,137 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* custom style */
+
+body, html {
+	font-family: Arial, Helvetica, sans-serif;
+	height: 100%;
+	display: grid;
+}
+
+body {
+	background: rgb(226, 236, 130);
+}
+
+.container {
+	margin: auto;
+	padding: 3em;
+}
+
+.navbar {
+	border-radius: 1em 1em 0 0;
+	background: rgb(124, 71, 248);
+}
+
+.start {
+	width: 7em;
+	border-top-left-radius: 1em;
+	border: none;
+	background: rgb(228, 172, 51);
+}
+
+.start:hover {
+	background: rgb(238, 187, 77);
+}
+
+.playing-area {
+	padding: 1em;
+	border-radius: 0 0 1em 1em;
+	background: rgb(162, 122, 255);
+}
+
+.row {
+	display: block;
+	margin: 4em 2em;
+}
+
+.mole-hole {
+	display: inline-block;
+	width: 9em;
+	height: 10em;
+	margin-right: 4em;
+}
+
+.mole-hole::after {
+	position: absolute;
+	display: block;
+	top: 75%;
+	content: '';
+	width: 9em;
+	height: 6em;
+	background: url(../img/house.png) bottom center no-repeat;
+}
+
+.mole {
+	transition: all 1s;
+	/* position: absolute; */
+	transform: translateY(100%);
+	background: url(../img/employee.png) bottom center no-repeat;
+	width: 9em;
+	height: 9em;
+	opacity: 0;
+}
+
+.mole.up {
+	opacity: 1;
+	transform: translateY(-50%);
+}
+
+.mole-hole:last-child {
+	margin-right: 0;
+}
+
+a {
+	text-decoration: none;
+	color: rgb(125, 94, 197);
+}
+
+p {
+	text-align: center;
+}
