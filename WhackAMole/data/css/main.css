@@ -87,21 +87,24 @@ body {
 }
 
 .row {
+	position: relative;
 	display: block;
 	margin: 4em 2em;
 }
 
 .mole-hole {
+	position: relative;
 	display: inline-block;
 	width: 9em;
-	height: 10em;
+	height: 12em;
 	margin-right: 4em;
+	overflow: hidden;
 }
 
 .mole-hole::after {
-	position: absolute;
+	position: relative;
+	top: 54%;
 	display: block;
-	top: 75%;
 	content: '';
 	width: 9em;
 	height: 6em;
@@ -109,18 +112,19 @@ body {
 }
 
 .mole {
-	transition: all 1s;
-	/* position: absolute; */
-	transform: translateY(100%);
+	position: absolute;
 	background: url(../img/employee.png) bottom center no-repeat;
+	top: 46%;
 	width: 9em;
 	height: 9em;
-	opacity: 0;
+	transition: all 1s;
+
+	/* opacity: 0; */
 }
 
 .mole.up {
-	opacity: 1;
-	transform: translateY(-50%);
+	/* transition: all 1s; */
+	transform: translateY(-70%);
 }
 
 .mole-hole:last-child {
