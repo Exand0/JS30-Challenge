@@ -12,9 +12,20 @@
     <div class="container">
         <div class="navbar">
             <button class="start">Start</button>
-            <p class="score"></p>
+            <h1 class="score"></h1>
+            <div class="menu">
+                <label class="difficulty-label">Choose difficulty </label>
+                <select class="difficulty-input">
+                    <option>Easy</option>
+                    <option value="1">Medium</option>
+                    <option>Hard</option>
+                </select>
+                <label class="duration-label">Choose game duration </label>
+                <input class="duration-input" min="10" max="100" step="1" type="range">
+            </div>
         </div>
         <div class="playing-area"></div>
+        
     </div>
     <div>
         Icons made by <a href="https://www.freepik.com/">Freepik</a> from <a href="https://www.flaticon.com/" >Flaticon</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" target="_blank">CC 3.0 BY</a>

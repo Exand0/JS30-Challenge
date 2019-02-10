@@ -65,15 +65,60 @@ body {
 }
 
 .navbar {
+	overflow: hidden;
+	position: relative;
 	border-radius: 1em 1em 0 0;
 	background: rgb(124, 71, 248);
+	transition: all 1s;
 }
 
 .start {
-	width: 7em;
+	display: block;
+	width: 15em;
+	padding: 1em 0;
 	border-top-left-radius: 1em;
 	border: none;
 	background: rgb(228, 172, 51);
+}
+
+.start.finish {
+	width: 10em;
+}
+
+.menu {
+	color: rgb(255, 255, 255);
+	padding-bottom: 1em;
+}
+
+.menu.hidden {
+	display: none;
+}
+
+.duration-input {
+	/* margin: auto; */
+	display: block;
+	width: 90%;
+	margin: 0 auto;
+}
+
+.difficulty-input {
+	display: block;
+	width: 40%;
+	margin: 0 auto;
+}
+
+.duration-label {
+	display: block;
+	width: 66.5%;
+	margin: 0 auto;
+	padding: 0.5em;
+}
+
+.difficulty-label {
+	display: block;
+	width: 53.5%;
+	margin: 0 auto;	
+	padding: 0.5em;
 }
 
 .start:hover {
@@ -81,15 +126,21 @@ body {
 }
 
 .playing-area {
+	/* position: absolute; */
 	padding: 1em;
 	border-radius: 0 0 1em 1em;
 	background: rgb(162, 122, 255);
+	transition: all 1s;
+	/* top: -100%; */
+	/* transform: translate(-90%, -500%); */
+	/* opacity: 0; */
 }
 
 .row {
 	position: relative;
 	display: block;
-	margin: 4em 2em;
+	margin: 3em 2em;
+	transition: all 1s;
 }
 
 .mole-hole {
@@ -136,6 +187,11 @@ a {
 	color: rgb(125, 94, 197);
 }
 
-p {
+.score {
+	position: absolute;
+	display: inline-block;
+	font-size: 1.5em;
+	top: 28%;
+	left: 50%;
 	text-align: center;
 }

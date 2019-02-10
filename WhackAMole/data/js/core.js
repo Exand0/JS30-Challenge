@@ -1,13 +1,19 @@
 // let moleImgPath = "..img/employee.png";
+/* <div class="playing-area"></div> */
 
 let playingArea = document.querySelector('.playing-area');
 let startButton = document.querySelector('.start');
 let scoreEl = document.querySelector('.score');
-let lastHole;
+let spawnInterval;
+let holes = [];
+let moles = [];
+let rows = [];
+let lastOut;
 let score;
+let timeIsOut = true;
 
 function buildField(rowCount, colCount) {
-    let rows = [];
+
     for (let i = 0; i < rowCount; i++) {
         let rowEl = document.createElement('div');
         rowEl.classList.add('row');
@@ -15,6 +21,7 @@ function buildField(rowCount, colCount) {
             let moleHoleDiv = document.createElement('div');
             moleHoleDiv.classList.add('mole-hole');
             rowEl.appendChild(moleHoleDiv);
+            holes.push(moleHoleDiv);
         } 
         rows.push(rowEl); 
     }
@@ -25,61 +32,43 @@ function drawField(rows) {
     rows.forEach(row => playingArea.appendChild(row));
 }
 
-function addMole() {
-    let holes = Array.from(document.querySelectorAll('.mole-hole'));
+function chooseRandom(array) {
+    let randomPos = Math.floor(Math.random()*array.length);
+    let arrayEl = array[randomPos];
 
-    holes.forEach(hole => {
+    if (arrayEl === lastOut) {
+        console.log('nope');
+        return chooseRandom(array);
+    }
+    lastOut = arrayEl;
+    return arrayEl;
+}
+
+function spawnMoles() {
+    // console.log(holes);
+    holes.forEach((hole, index) => {
         let mole = document.createElement('div');
         mole.classList.add('mole');
-        mole.classList.add('up');
 
         hole.appendChild(mole);
-        console.log(hole);
-    })
+        mole.addEventListener('click', increaseScore);
+
+        moles[index] = mole;
+    });
+    console.log(moles);
+    // return moles;
 }
 
-function chooseRandomHole() {
-    let holes = Array.from(document.querySelectorAll('.mole-hole'));
-    let randomPosition = Math.floor(Math.random()*holes.length);
-    let hole = holes[randomPosition];
-
-    if (hole === lastHole) {
-        console.log('nope');
-        return chooseRandomHole();
-    }
-    console.log(lastHole === hole);
-    lastHole = hole;
-    return hole;
+function getRandomTime(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-// function spawnMoles(count, frequency=1000) {
-//     let holes = Array.from(document.querySelectorAll('.mole-hole'));
-
-//     for (let i = 0; i < count; i++) {
-//         let mole = document.createElement('div');
-//         let randomPosition = Math.floor(Math.random()*holes.length);
-//         holes[randomPosition].appendChild(mole);
-//         mole.classList.add('mole');
-
-//         setInterval(() => {
-//             setTimeout(() => mole.classList.add('up'), 300);
-//             // setTimeout(() => mole.classList.remove('up'), 300);
-//         }, frequency);
-//     }
-// }
-
-function spawnMole(holeEl, time=1000) {
-    let mole = document.createElement('div');
-
-    mole.classList.add('mole');
-    holeEl.appendChild(mole);
-
-    mole.addEventListener('click', increaseScore);
-
-    setTimeout(() => mole.classList.add('up'), 100);
+function moleUp(mole) {
+    let time = getRandomTime(200, 1000)
+    mole.classList.add('up');
     setTimeout(() => mole.classList.remove('up'), time);
-    let removeAfter = 1100 + time;
-    setTimeout(() => mole.remove(), removeAfter);
 }
 
 function increaseScore() {
@@ -87,21 +76,55 @@ function increaseScore() {
     scoreEl.textContent = `Score: ${score}`;
 }
 
-function play(playtime = 10000) {
-    let timeOut = false;
-    score = 0;
-    setTimeout(() => timeOut = true, playtime);
-    
-    drawField(buildField(3,3));
+function initialize() {
+    // let playingArea = document.createElement('div');
+    // playingArea.classList.add('playing-area');
 
-    setInterval(() => {
-        spawnMole(chooseRandomHole());
+    let menu = document.querySelector('.menu');
+    menu.classList.add('hidden');
+
+    
+}
+
+function toggleStartButton() {
+    let buttonText;
+    if (timeIsOut === true) {
+        play();
+        buttonText = 'Finish';
+    } else if (timeIsOut === false) {
+        stop();
+        buttonText = 'Start';
+    }
+    startButton.textContent = `${buttonText}`;
+    startButton.classList.toggle('finish');   
+}
+
+function stop() {
+    timeIsOut = true;
+    clearInterval(spawnInterval); 
+    moles.forEach(mole => mole.remove());
+    holes.forEach(hole => hole.remove());
+    rows.forEach(hole => hole.remove());
+}
+
+function play(playtime = 10000) {
+    score = 0;
+    timeIsOut = false;
+
+    initialize();
+
+    setTimeout(() => {
+        timeIsOut = true;
+    }, playtime);
+    drawField(buildField(3,3));
+    spawnMoles();
+
+    spawnInterval = setInterval(() => {
+        if(!timeIsOut) moleUp(chooseRandom(moles));;
     }, 300); 
 }
 
-
-
-startButton.addEventListener('click', play);
+startButton.addEventListener('click', toggleStartButton);
 
 // drawField(buildField(3,3));
 // addMole();
