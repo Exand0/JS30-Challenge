@@ -4,13 +4,55 @@
 let playingArea = document.querySelector('.playing-area');
 let startButton = document.querySelector('.start');
 let scoreEl = document.querySelector('.score');
-let spawnInterval;
+let menu = document.querySelector('.menu');
+let durationInput = document.querySelector('.duration-input');
+let durationLabel = document.querySelector('.duration-label');
+let difficultyInput = document.querySelector('.difficulty-input');
+let difficultyLabel = document.querySelector('.difficulty-label');
+
+let startCountdown;
+let spawnIntervalTimer;
 let holes = [];
 let moles = [];
 let rows = [];
 let lastOut;
-let score;
+let score = 0;
 let timeIsOut = true;
+// let isRunning = true;
+
+let spawnFrequency = 300;
+let duration = 10000;
+
+let diffuculty = {
+    easy: {
+        spawnFrequency: 500,
+        UpTimeRange: [1000, 1500]
+    },
+    medium: {
+        spawnFrequency: 300,
+        UpTimeRange: [500, 1000]
+    },
+    hard: {
+        spawnFrequency: 200,
+        UpTimeRange: [200, 500]
+    }
+}
+
+function handleDurationInput(e) {
+    duration = e.target.value*1000;
+}
+
+function handleDifficultyInput(e) {
+    // console.log(e.target);
+    if (e.target.options.selectedIndex === 0) {
+        console.log(e.target.selectedOptions[0].text);
+    // } else if ()
+}
+
+function updateDisplayedSettings() {
+    durationLabel.textContent = `Game duration: ${duration/1000}s`
+}
+
 
 function buildField(rowCount, colCount) {
 
@@ -45,18 +87,22 @@ function chooseRandom(array) {
 }
 
 function spawnMoles() {
-    // console.log(holes);
     holes.forEach((hole, index) => {
         let mole = document.createElement('div');
         mole.classList.add('mole');
-
         hole.appendChild(mole);
-        mole.addEventListener('click', increaseScore);
-
         moles[index] = mole;
     });
-    console.log(moles);
+
     // return moles;
+}
+
+function toggleDisplayScore() {
+    if (timeIsOut === true) {
+        scoreEl.classList.add('in-game');
+    } else {
+        scoreEl.classList.remove('in-game');
+    }
 }
 
 function getRandomTime(min, max) {
@@ -66,70 +112,80 @@ function getRandomTime(min, max) {
 }
 
 function moleUp(mole) {
-    let time = getRandomTime(200, 1000)
+    let time = getRandomTime(1000, 1500)
+    mole.addEventListener('click', moleClick, { once: true });
     mole.classList.add('up');
-    setTimeout(() => mole.classList.remove('up'), time);
+    setTimeout(() => {
+        mole.classList.remove('up');
+        mole.removeEventListener('click', moleClick, { once: true });
+    }, time);
+
+}
+
+function moleClick(e) {
+    increaseScore();
+    console.log(e.target);
 }
 
 function increaseScore() {
     score++;
+    displayScore();
+}
+
+function displayScore() {
     scoreEl.textContent = `Score: ${score}`;
 }
 
-function initialize() {
-    // let playingArea = document.createElement('div');
-    // playingArea.classList.add('playing-area');
-
-    let menu = document.querySelector('.menu');
-    menu.classList.add('hidden');
-
-    
+function toggleMenu() {
+    if (timeIsOut === false) menu.classList.add('hidden');
+    else menu.classList.remove('hidden');
 }
 
 function toggleStartButton() {
     let buttonText;
-    if (timeIsOut === true) {
-        play();
-        buttonText = 'Finish';
-    } else if (timeIsOut === false) {
-        stop();
+    toggleGame();
+    toggleMenu();
+    if (timeIsOut === false) {
+        buttonText = 'Stop';
+    } else {
         buttonText = 'Start';
     }
     startButton.textContent = `${buttonText}`;
-    startButton.classList.toggle('finish');   
+    startButton.classList.toggle('stop');   
 }
 
-function stop() {
-    timeIsOut = true;
-    clearInterval(spawnInterval); 
-    moles.forEach(mole => mole.remove());
-    holes.forEach(hole => hole.remove());
-    rows.forEach(hole => hole.remove());
-}
+function toggleGame() {
+    toggleDisplayScore();
+    if (timeIsOut === true) {
+        timeIsOut = false;
+        score = 0;   
+        displayScore();     
 
-function play(playtime = 10000) {
-    score = 0;
-    timeIsOut = false;
+        // startCountdown = setTimeout(toggleGame, 1000);
 
-    initialize();
+        setTimeout(() => {
+            toggleGame();
+            toggleMenu();
+        }, duration);
+        drawField(buildField(2,3));
+        spawnMoles();
+    
+        spawnIntervalTimer = setInterval(() => {
+            if(!timeIsOut) moleUp(chooseRandom(moles));
+        }, 300); 
 
-    setTimeout(() => {
+    } else {
         timeIsOut = true;
-    }, playtime);
-    drawField(buildField(3,3));
-    spawnMoles();
-
-    spawnInterval = setInterval(() => {
-        if(!timeIsOut) moleUp(chooseRandom(moles));;
-    }, 300); 
+        clearInterval(spawnIntervalTimer); 
+        moles.forEach(mole => mole.remove());
+        holes.forEach(hole => hole.remove());
+        rows.forEach(hole => hole.remove());
+    }
 }
 
 startButton.addEventListener('click', toggleStartButton);
-
-// drawField(buildField(3,3));
-// addMole();
-// spawnMoles(10);
-// spawnMole(chooseRandomHole());
+durationInput.addEventListener('input', handleDurationInput);
+difficultyInput.addEventListener('change', handleDifficultyInput);
 
 
 

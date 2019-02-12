@@ -81,7 +81,8 @@ body {
 	background: rgb(228, 172, 51);
 }
 
-.start.finish {
+.start.stop {
+	display: inline-block;
 	width: 10em;
 }
 
@@ -168,7 +169,7 @@ body {
 	top: 46%;
 	width: 9em;
 	height: 9em;
-	transition: all 1s;
+	transition: all 0.5s;
 
 	/* opacity: 0; */
 }
@@ -188,10 +189,15 @@ a {
 }
 
 .score {
-	position: absolute;
-	display: inline-block;
+	display: block;
+	padding: 0.5em;
 	font-size: 1.5em;
+	text-align: center;
+}
+
+.score.in-game {
+	position: absolute;
+	padding: 0;
 	top: 28%;
 	left: 50%;
-	text-align: center;
 }
