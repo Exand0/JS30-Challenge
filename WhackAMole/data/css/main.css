@@ -53,6 +53,7 @@ body, html {
 	font-family: Arial, Helvetica, sans-serif;
 	height: 100%;
 	display: grid;
+	grid-template-rows: 1fr;
 }
 
 body {
@@ -61,7 +62,7 @@ body {
 
 .container {
 	margin: auto;
-	padding: 3em;
+	/* padding: 3em; */
 }
 
 .navbar {
@@ -140,7 +141,7 @@ body {
 .row {
 	position: relative;
 	display: block;
-	margin: 3em 2em;
+	margin: 0.5em 1em;
 	transition: all 1s;
 }
 
@@ -170,7 +171,7 @@ body {
 	width: 9em;
 	height: 9em;
 	transition: all 0.3s;
-
+	cursor: pointer;
 	/* opacity: 0; */
 }
 
@@ -185,7 +186,7 @@ body {
 
 a {
 	text-decoration: none;
-	color: rgb(125, 94, 197);
+	color: rgb(235, 206, 80);
 }
 
 .score {
@@ -200,4 +201,10 @@ a {
 	padding: 0;
 	top: 28%;
 	left: 50%;
+}
+
+.copyright {
+	padding: 0.7em;
+	background: rgb(116, 87, 184);
+	color: rgb(255, 255, 255);
 }
